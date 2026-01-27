@@ -1,0 +1,32 @@
+package com.gorakh.lldrunner.vendingmachine;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class Inventory {
+    private final Map<Product, Integer> products;
+
+    public Inventory() {
+        this.products = new ConcurrentHashMap<>();
+    }
+
+    public void addProduct(Product product, Integer amount){
+        products.put(product , amount);
+    }
+
+    public void removeProduct(Product product) {
+        products.remove(product);
+    }
+
+    public void updateQuantity(Product product, Integer quantity) {
+        products.put(product, quantity);
+    }
+
+    public int getQuantity(Product product) {
+        return products.getOrDefault(product, 0);
+    }
+
+    public boolean isAvailable(Product product) {
+        return products.containsKey(product) && products.get(product) > 0;
+    }
+
+}
